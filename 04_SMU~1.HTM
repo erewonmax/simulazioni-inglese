@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulazione IV – Test di inglese</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+    }
+    #exercise-widget {
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 18px;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+    }
+    .question-text {
+      margin-bottom: 6px;
+    }
+    .options {
+      margin-bottom: 6px;
+    }
+    .options label {
+      display: block;
+    }
+    .status-label {
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    .status-correct { color: #0f9d58 !important; }
+    .status-solution { color: #c62828 !important; }
+    .status-empty { color: #c62828 !important; }
+    .correct-answer-label {
+      font-weight: bold;
+      color: #0f9d58 !important;
+      background-color: #e6f6ec;
+      border-radius: 4px;
+    }
+    .explanation {
+      display: none;
+      margin-top: 8px;
+      padding: 8px 10px;
+      background-color: #fff8e1;
+      border-left: 4px solid #f4b400;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    .explanation.show {
+      display: block;
+    }
+    .btn {
+      padding: 6px 12px;
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #888;
+      background-color: #f5f5f5;
+    }
+    .btn-main {
+      background-color: #e0f0ff;
+      border-color: #4a90e2;
+    }
+    .score {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="exercise-widget">
+    <h1>Simulazione IV</h1>
+    <h2>Test di inglese – 35 domande a scelta multipla</h2>
+
+    <button type="button" class="btn btn-main" onclick="verifyAll()">Verifica tutto</button>
+    <div id="score" class="score">Punteggio: 0 / 35</div>
+    <button type="button" class="btn" onclick="downloadHTML()">Scarica questo test in HTML</button>
+
+    <!-- Prima parte: domande 1–20 -->
+    <div class="question-block" id="q1-block">
+      <div class="question-text">
+        1. Robert ______ away two or three times a year.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> a) is going usually</label>
+        <label><input type="radio" name="q1" value="b"> b) goes usually</label>
+        <label><input type="radio" name="q1" value="c"> c) usually goes</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q1')">Verifica</button>
+      <span id="status-q1" class="status-label"></span>
+      <div id="explanation-q1" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q2-block">
+      <div class="question-text">
+        2. Matt ______ while we were having dinner.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> a) phoned</label>
+        <label><input type="radio" name="q2" value="b"> b) was phoning</label>
+        <label><input type="radio" name="q2" value="c"> c) has phoned</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q2')">Verifica</button>
+      <span id="status-q2" class="status-label"></span>
+      <div id="explanation-q2" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q3-block">
+      <div class="question-text">
+        3. It's two years ______ Joe.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> a) since I last saw</label>
+        <label><input type="radio" name="q3" value="b"> b) since I didn't see</label>
+        <label><input type="radio" name="q3" value="c"> c) that I haven't seen</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q3')">Verifica</button>
+      <span id="status-q3" class="status-label"></span>
+      <div id="explanation-q3" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q4-block">
+      <div class="question-text">
+        4. My mother ______ in Italy.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> a) has grown up</label>
+        <label><input type="radio" name="q4" value="b"> b) grew up</label>
+        <label><input type="radio" name="q4" value="c"> c) had grown up</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q4')">Verifica</button>
+      <span id="status-q4" class="status-label"></span>
+      <div id="explanation-q4" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q5-block">
+      <div class="question-text">
+        5. I'm so tired I ______ for a week.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> a) could sleep</label>
+        <label><input type="radio" name="q5" value="b"> b) can sleep</label>
+        <label><input type="radio" name="q5" value="c"> c) could have slept</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q5')">Verifica</button>
+      <span id="status-q5" class="status-label"></span>
+      <div id="explanation-q5" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+      <div class="question-text">
+        6. ______ a little longer, but I really have to go now.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="a"> a) I can stay</label>
+        <label><input type="radio" name="q6" value="b"> b) I'd stay</label>
+        <label><input type="radio" name="q6" value="c"> c) I'll stay</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q6')">Verifica</button>
+      <span id="status-q6" class="status-label"></span>
+      <div id="explanation-q6" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q7-block">
+      <div class="question-text">
+        7. "Where ______?" "In Chicago."
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="a"> a) were you born</label>
+        <label><input type="radio" name="q7" value="b"> b) did you born</label>
+        <label><input type="radio" name="q7" value="c"> c) are you born</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q7')">Verifica</button>
+      <span id="status-q7" class="status-label"></span>
+      <div id="explanation-q7" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+      <div class="question-text">
+        8. "What time ______?" "At 8.30."
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="a"> a) starts the film</label>
+        <label><input type="radio" name="q8" value="b"> b) does start the film</label>
+        <label><input type="radio" name="q8" value="c"> c) does the film start</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q8')">Verifica</button>
+      <span id="status-q8" class="status-label"></span>
+      <div id="explanation-q8" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q9-block">
+      <div class="question-text">
+        9. "You don't know where Karen is, ______?" "Sorry, I have no idea."
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="a"> a) is she</label>
+        <label><input type="radio" name="q9" value="b"> b) do you</label>
+        <label><input type="radio" name="q9" value="c"> c) don't you</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q9')">Verifica</button>
+      <span id="status-q9" class="status-label"></span>
+      <div id="explanation-q9" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+      <div class="question-text">
+        10. Helen works six days ______ week.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="a"> a) a</label>
+        <label><input type="radio" name="q10" value="b"> b) for</label>
+        <label><input type="radio" name="q10" value="c"> c) at</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q10')">Verifica</button>
+      <span id="status-q10" class="status-label"></span>
+      <div id="explanation-q10" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+      <div class="question-text">
+        11. This isn't my book. It's ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="a"> a) of my sister</label>
+        <label><input type="radio" name="q11" value="b"> b) my sister's</label>
+        <label><input type="radio" name="q11" value="c"> c) of my sister's</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q11')">Verifica</button>
+      <span id="status-q11" class="status-label"></span>
+      <div id="explanation-q11" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+      <div class="question-text">
+        12. They live on a busy road. ______ a lot of noise from the traffic.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="a"> a) It must be</label>
+        <label><input type="radio" name="q12" value="b"> b) There must have</label>
+        <label><input type="radio" name="q12" value="c"> c) There must be</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q12')">Verifica</button>
+      <span id="status-q12" class="status-label"></span>
+      <div id="explanation-q12" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q13-block">
+      <div class="question-text">
+        13. He's lazy. He never does ______ work.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="a"> a) some</label>
+        <label><input type="radio" name="q13" value="b"> b) any</label>
+        <label><input type="radio" name="q13" value="c"> c) no</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q13')">Verifica</button>
+      <span id="status-q13" class="status-label"></span>
+      <div id="explanation-q13" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+      <div class="question-text">
+        14. George showed me some pictures ______ by his father.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="a"> a) painting</label>
+        <label><input type="radio" name="q14" value="b"> b) they were painted</label>
+        <label><input type="radio" name="q14" value="c"> c) painted</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q14')">Verifica</button>
+      <span id="status-q14" class="status-label"></span>
+      <div id="explanation-q14" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+      <div class="question-text">
+        15. I'm going away ______ the end of January.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="a"> a) in</label>
+        <label><input type="radio" name="q15" value="b"> b) on</label>
+        <label><input type="radio" name="q15" value="c"> c) at</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q15')">Verifica</button>
+      <span id="status-q15" class="status-label"></span>
+      <div id="explanation-q15" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+      <div class="question-text">
+        16. Our apartment is ______ the second floor of the building.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="a"> a) on</label>
+        <label><input type="radio" name="q16" value="b"> b) in</label>
+        <label><input type="radio" name="q16" value="c"> c) at</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q16')">Verifica</button>
+      <span id="status-q16" class="status-label"></span>
+      <div id="explanation-q16" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q17-block">
+      <div class="question-text">
+        17. I saw Steve ______ a conference on Saturday.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="a"> a) at</label>
+        <label><input type="radio" name="q17" value="b"> b) in</label>
+        <label><input type="radio" name="q17" value="c"> c) to</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q17')">Verifica</button>
+      <span id="status-q17" class="status-label"></span>
+      <div id="explanation-q17" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+      <div class="question-text">
+        18. I'll be in Singapore next week. I hope to see some friends of mine ______ there.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="a"> a) during I'm</label>
+        <label><input type="radio" name="q18" value="b"> b) while I'm</label>
+        <label><input type="radio" name="q18" value="c"> c) while I'll be</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q18')">Verifica</button>
+      <span id="status-q18" class="status-label"></span>
+      <div id="explanation-q18" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q19-block">
+      <div class="question-text">
+        19. In Italy people ______ to do business by phone.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q19" value="a"> a) likes</label>
+        <label><input type="radio" name="q19" value="b"> b) don't like</label>
+        <label><input type="radio" name="q19" value="c"> c) doesn't like</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q19')">Verifica</button>
+      <span id="status-q19" class="status-label"></span>
+      <div id="explanation-q19" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+      <div class="question-text">
+        20. There are still some biscuits in the box, ______?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q20" value="a"> a) are there</label>
+        <label><input type="radio" name="q20" value="b"> b) aren't there</label>
+        <label><input type="radio" name="q20" value="c"> c) aren't they</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q20')">Verifica</button>
+      <span id="status-q20" class="status-label"></span>
+      <div id="explanation-q20" class="explanation"></div>
+    </div>
+
+    <!-- Seconda parte: domande 21–35 -->
+    <div class="question-block" id="q21-block">
+      <div class="question-text">
+        21. We ______ in London when we ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q21" value="a"> a) 're going to live / will get married</label>
+        <label><input type="radio" name="q21" value="b"> b) 're going to live / get married</label>
+        <label><input type="radio" name="q21" value="c"> c) 're going to live / marry</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q21')">Verifica</button>
+      <span id="status-q21" class="status-label"></span>
+      <div id="explanation-q21" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q22-block">
+      <div class="question-text">
+        22. You ______ respect your elders.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q22" value="a"> a) have</label>
+        <label><input type="radio" name="q22" value="b"> b) could</label>
+        <label><input type="radio" name="q22" value="c"> c) should</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q22')">Verifica</button>
+      <span id="status-q22" class="status-label"></span>
+      <div id="explanation-q22" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q23-block">
+      <div class="question-text">
+        23. There is a child in the bedroom, ______?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q23" value="a"> a) is there</label>
+        <label><input type="radio" name="q23" value="b"> b) isn't there</label>
+        <label><input type="radio" name="q23" value="c"> c) there isn't</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q23')">Verifica</button>
+      <span id="status-q23" class="status-label"></span>
+      <div id="explanation-q23" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q24-block">
+      <div class="question-text">
+        24. I live ______ 38, Salterton Road.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q24" value="a"> a) in</label>
+        <label><input type="radio" name="q24" value="b"> b) on</label>
+        <label><input type="radio" name="q24" value="c"> c) at</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q24')">Verifica</button>
+      <span id="status-q24" class="status-label"></span>
+      <div id="explanation-q24" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q25-block">
+      <div class="question-text">
+        25. I ______ pass my exam, otherwise my father will get very angry.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q25" value="a"> a) must</label>
+        <label><input type="radio" name="q25" value="b"> b) have</label>
+        <label><input type="radio" name="q25" value="c"> c) couldn't</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q25')">Verifica</button>
+      <span id="status-q25" class="status-label"></span>
+      <div id="explanation-q25" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q26-block">
+      <div class="question-text">
+        26. The ______ faces were quite thin from a lack of food.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q26" value="a"> a) girls's</label>
+        <label><input type="radio" name="q26" value="b"> b) girls'</label>
+        <label><input type="radio" name="q26" value="c"> c) girl's</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q26')">Verifica</button>
+      <span id="status-q26" class="status-label"></span>
+      <div id="explanation-q26" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q27-block">
+      <div class="question-text">
+        27. She's at the ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q27" value="a"> a) doctor'</label>
+        <label><input type="radio" name="q27" value="b"> b) doctor's</label>
+        <label><input type="radio" name="q27" value="c"> c) doctor</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q27')">Verifica</button>
+      <span id="status-q27" class="status-label"></span>
+      <div id="explanation-q27" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q28-block">
+      <div class="question-text">
+        28. I love ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q28" value="a"> a) Dickens novels</label>
+        <label><input type="radio" name="q28" value="b"> b) Dickens' novels</label>
+        <label><input type="radio" name="q28" value="c"> c) Dickens's novels</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q28')">Verifica</button>
+      <span id="status-q28" class="status-label"></span>
+      <div id="explanation-q28" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q29-block">
+      <div class="question-text">
+        29. Look at the sky: it ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q29" value="a"> a) might rain</label>
+        <label><input type="radio" name="q29" value="b"> b) can rain</label>
+        <label><input type="radio" name="q29" value="c"> c) may rain</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q29')">Verifica</button>
+      <span id="status-q29" class="status-label"></span>
+      <div id="explanation-q29" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q30-block">
+      <div class="question-text">
+        30. The postman hasn't come ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q30" value="a"> a) just</label>
+        <label><input type="radio" name="q30" value="b"> b) yet</label>
+        <label><input type="radio" name="q30" value="c"> c) already</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q30')">Verifica</button>
+      <span id="status-q30" class="status-label"></span>
+      <div id="explanation-q30" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q31-block">
+      <div class="question-text">
+        31. George has ______ to England three times already.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q31" value="a"> a) been</label>
+        <label><input type="radio" name="q31" value="b"> b) gone</label>
+        <label><input type="radio" name="q31" value="c"> c) went</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q31')">Verifica</button>
+      <span id="status-q31" class="status-label"></span>
+      <div id="explanation-q31" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q32-block">
+      <div class="question-text">
+        32. It ______ hot in Calcutta today.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q32" value="a"> a) is</label>
+        <label><input type="radio" name="q32" value="b"> b) makes</label>
+        <label><input type="radio" name="q32" value="c"> c) does</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q32')">Verifica</button>
+      <span id="status-q32" class="status-label"></span>
+      <div id="explanation-q32" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q33-block">
+      <div class="question-text">
+        33. "I'm going home." "______."
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q33" value="a"> a) Me too</label>
+        <label><input type="radio" name="q33" value="b"> b) I also</label>
+        <label><input type="radio" name="q33" value="c"> c) I too</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q33')">Verifica</button>
+      <span id="status-q33" class="status-label"></span>
+      <div id="explanation-q33" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q34-block">
+      <div class="question-text">
+        34. Sean arrived ______ university ______ two o'clock.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q34" value="a"> a) in / at</label>
+        <label><input type="radio" name="q34" value="b"> b) at / at</label>
+        <label><input type="radio" name="q34" value="c"> c) to / at</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q34')">Verifica</button>
+      <span id="status-q34" class="status-label"></span>
+      <div id="explanation-q34" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q35-block">
+      <div class="question-text">
+        35. ______ U.S.A. are really far from here.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q35" value="a"> a) The all</label>
+        <label><input type="radio" name="q35" value="b"> b) --</label>
+        <label><input type="radio" name="q35" value="c"> c) The</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q35')">Verifica</button>
+      <span id="status-q35" class="status-label"></span>
+      <div id="explanation-q35" class="explanation"></div>
+    </div>
+  </div>
+
+  <script>
+    // Risposte corrette secondo Simulazione-IV-RISPOSTE.docx
+    const correctAnswers = {
+      q1: 'c',
+      q2: 'a',
+      q3: 'a',
+      q4: 'b',
+      q5: 'a',
+      q6: 'b',
+      q7: 'a',
+      q8: 'c',
+      q9: 'b',
+      q10: 'a',
+      q11: 'b',
+      q12: 'c',
+      q13: 'b',
+      q14: 'c',
+      q15: 'c',
+      q16: 'a',
+      q17: 'a',
+      q18: 'b',
+      q19: 'b',
+      q20: 'b',
+      q21: 'b',
+      q22: 'c',
+      q23: 'b',
+      q24: 'c',
+      q25: 'a',
+      q26: 'b',
+      q27: 'b',
+      q28: 'c',
+      q29: 'a',
+      q30: 'b',
+      q31: 'a',
+      q32: 'a',
+      q33: 'a',
+      q34: 'b',
+      q35: 'c'
+    };
+
+    const explanations = {
+      q1: "Risposta: c) usually goes. Gli avverbi di frequenza (usually, always, never...) si collocano prima del verbo principale nel present simple (non dopo).",
+      q2: "Risposta: a) phoned. \"While we were having dinner\" (past continuous, azione di sfondo) è interrotta da un'azione breve al past simple (\"phoned\").",
+      q3: "Risposta: a) since I last saw. Struttura fissa \"It's + periodo di tempo + since + past simple\" per esprimere da quanto tempo non accade qualcosa.",
+      q4: "Risposta: b) grew up. \"Crescere in un luogo\" è un'azione conclusa nel passato: past simple irregolare di \"grow\" → \"grew\".",
+      q5: "Risposta: a) could sleep. \"Could\" con valore ipotetico/di capacità presente, in un'espressione idiomatica per dire quanto si è stanchi (potrei dormire per una settimana).",
+      q6: "Risposta: b) I'd stay. \"I'd\" = \"I would\": condizionale per un desiderio ipotetico contrastato dalla realtà (\"ma devo proprio andare ora\").",
+      q7: "Risposta: a) were you born. Il verbo \"be born\" (nascere) al passato si coniuga sempre con \"was/were born\", mai con l'ausiliare \"did\".",
+      q8: "Risposta: c) does the film start. Nelle domande con \"what time\" e orari fissi si usa il present simple; l'ordine corretto è ausiliare + soggetto + verbo base (\"does the film start\", non \"does start the film\").",
+      q9: "Risposta: b) do you. Question tag: la frase principale (\"you don't know\") è negativa al present simple, quindi il tag è affermativo con l'ausiliare \"do\": \"do you?\".",
+      q10: "Risposta: a) a. \"A week\" ha qui valore distributivo (\"alla settimana\"), come in \"once a week\", \"six days a week\".",
+      q11: "Risposta: b) my sister's. Genitivo sassone in forma assoluta: sostituisce \"my sister's book\" senza ripetere il sostantivo.",
+      q12: "Risposta: c) There must be. \"There must be\" esprime una deduzione logica sull'esistenza di qualcosa (\"ci deve essere\"); \"it must be\" si usa in contesti diversi, non per \"esserci\".",
+      q13: "Risposta: b) any. \"Never\" rende la frase negativa nel significato: si usa quindi \"any\", non \"some\" (frasi affermative) né \"no\" (che creerebbe una doppia negazione).",
+      q14: "Risposta: c) painted. Participio passato con valore passivo (\"pictures painted by his father\" = dipinti da suo padre): forma ridotta di una relativa passiva.",
+      q15: "Risposta: c) at. \"At the end of\" è un'espressione di tempo fissa (come at the beginning of).",
+      q16: "Risposta: a) on. I piani di un edificio si indicano con la preposizione \"on\" (on the second floor).",
+      q17: "Risposta: a) at. Eventi e manifestazioni (conferenze, concerti, feste) si indicano con \"at\" (at a conference).",
+      q18: "Risposta: b) while I'm there. Nelle proposizioni temporali introdotte da \"while\" riferite al futuro si usa il present simple, non \"will\".",
+      q19: "Risposta: b) don't like. Il soggetto \"people\" è plurale e richiede il verbo alla forma plurale: \"don't\", non \"doesn't\".",
+      q20: "Risposta: b) aren't there. Question tag per una frase affermativa con \"there are\": il tag corrispondente è negativo, \"aren't there?\".",
+      q21: "Risposta: b) 're going to live / get married. \"Be going to\" per un piano già deciso (vivere a Londra); nella proposizione temporale introdotta da \"when\" riferita al futuro si usa il present simple (\"get married\"), non \"will\".",
+      q22: "Risposta: c) should. \"Should\" esprime un consiglio o un dovere morale (rispettare gli anziani), diverso dall'obbligo forte di \"have to/must\" o dalla possibilità di \"could\".",
+      q23: "Risposta: b) isn't there. Question tag per una frase affermativa con \"there is\": il tag corrispondente è negativo, \"isn't there?\".",
+      q24: "Risposta: c) at. Gli indirizzi precisi (numero civico + via) si indicano con \"at\" (at 38, Salterton Road).",
+      q25: "Risposta: a) must. \"Must\" esprime un obbligo personale sentito come necessario (devo passare l'esame), rafforzato da \"otherwise\" che introduce la conseguenza.",
+      q26: "Risposta: b) girls'. Genitivo sassone plurale regolare: sostantivo plurale già terminante in -s + solo l'apostrofo (girls').",
+      q27: "Risposta: b) doctor's. \"At the doctor's\" è un'espressione ellittica con genitivo sassone (sottintende \"surgery/office\") per indicare lo studio del medico.",
+      q28: "Risposta: c) Dickens's novels. Genitivo sassone con nomi propri che terminano già in -s: si aggiunge comunque 's (Dickens's).",
+      q29: "Risposta: a) might rain. \"Might\" esprime una possibilità/previsione incerta, adatta a un'osservazione del cielo senza certezza.",
+      q30: "Risposta: b) yet. \"Yet\" nelle frasi negative (hasn't come yet) indica che qualcosa non è ancora successo, posizionato alla fine della frase.",
+      q31: "Risposta: a) been. \"Has been to\" con \"already\" ed espressioni di frequenza (three times) per esperienze ripetute: present perfect di \"be\".",
+      q32: "Risposta: a) is. Per descrivere condizioni meteorologiche o di temperatura si usa il verbo \"be\" (it is hot), non \"make\" o \"do\".",
+      q33: "Risposta: a) Me too. \"Me too\" è l'espressione idiomatica standard per essere d'accordo con un'affermazione positiva altrui.",
+      q34: "Risposta: b) at / at. \"Arrive at\" per un luogo generico/puntuale (non una città o un paese) + \"at two o'clock\" per un'ora precisa: entrambe le preposizioni sono \"at\".",
+      q35: "Risposta: c) The. I nomi di stati formati da più parole o da un acronimo (U.S.A., UK) richiedono l'articolo determinativo \"the\"."
+    };
+
+    const attempts = {};
+
+    function showResult(id, radios, status, selected, correct) {
+      const explanationDiv = document.getElementById('explanation-' + id);
+
+      if (selected === correct) {
+        status.textContent = 'Corretto';
+        status.className = 'status-label status-correct';
+        if (explanationDiv) {
+          explanationDiv.className = 'explanation';
+          explanationDiv.textContent = '';
+        }
+      } else {
+        status.textContent = 'Soluzione';
+        status.className = 'status-label status-solution';
+        for (let r of radios) {
+          const label = r.closest('label');
+          if (r.value === correct) {
+            r.checked = true;
+            if (label) label.classList.add('correct-answer-label');
+          } else {
+            r.disabled = true;
+          }
+        }
+        if (explanationDiv) {
+          explanationDiv.textContent = explanations[id] || '';
+          explanationDiv.className = 'explanation show';
+        }
+      }
+
+      for (let r of radios) {
+        r.disabled = true;
+      }
+    }
+
+    function verifyQuestion(id) {
+      const radios = document.getElementsByName(id);
+      const status = document.getElementById('status-' + id);
+
+      if (!attempts[id]) {
+        attempts[id] = 0;
+      }
+
+      let selected = null;
+      for (let r of radios) {
+        if (r.checked) {
+          selected = r.value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        status.textContent = 'Vuoto / Scegli';
+        status.className = 'status-label status-empty';
+        return;
+      }
+
+      if (attempts[id] >= 1) return;
+
+      attempts[id] += 1;
+      const correct = correctAnswers[id];
+
+      showResult(id, radios, status, selected, correct);
+
+      updateScore();
+    }
+
+    function verifyAll() {
+      for (const id of Object.keys(correctAnswers)) {
+        const radios = document.getElementsByName(id);
+        const status = document.getElementById('status-' + id);
+
+        if (!attempts[id]) {
+          attempts[id] = 0;
+        }
+
+        let selected = null;
+        for (let r of radios) {
+          if (r.checked) {
+            selected = r.value;
+            break;
+          }
+        }
+
+        if (!selected) {
+          status.textContent = 'Vuoto / Scegli';
+          status.className = 'status-label status-empty';
+          continue;
+        }
+
+        if (attempts[id] >= 1) continue;
+
+        attempts[id] += 1;
+        const correct = correctAnswers[id];
+
+        showResult(id, radios, status, selected, correct);
+      }
+
+      updateScore();
+    }
+    function updateScore() {
+      let correctCount = 0;
+      let total = 0;
+
+      for (const id in correctAnswers) {
+        if (!correctAnswers.hasOwnProperty(id)) continue;
+        total++;
+        const status = document.getElementById('status-' + id);
+        if (!status) continue;
+        if (status.textContent === 'Corretto') {
+          correctCount++;
+        }
+      }
+
+      const scoreEl = document.getElementById('score');
+      scoreEl.textContent = 'Punteggio: ' + correctCount + ' / ' + total;
+    }
+
+    function downloadHTML() {
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'simulazione-IV.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

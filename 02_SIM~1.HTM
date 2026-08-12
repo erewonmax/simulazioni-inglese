@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulazione II – Test di inglese</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+    }
+    #exercise-widget {
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .question-block {
+      margin-bottom: 18px;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+    }
+    .question-text {
+      margin-bottom: 6px;
+    }
+    .options {
+      margin-bottom: 6px;
+    }
+    .options label {
+      display: block;
+    }
+    .status-label {
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    .status-correct { color: #0f9d58 !important; }
+    .status-solution { color: #c62828 !important; }
+    .status-empty { color: #c62828 !important; }
+    .correct-answer-label {
+      font-weight: bold;
+      color: #0f9d58 !important;
+      background-color: #e6f6ec;
+      border-radius: 4px;
+    }
+    .explanation {
+      display: none;
+      margin-top: 8px;
+      padding: 8px 10px;
+      background-color: #fff8e1;
+      border-left: 4px solid #f4b400;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    .explanation.show {
+      display: block;
+    }
+    .btn {
+      padding: 6px 12px;
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #888;
+      background-color: #f5f5f5;
+    }
+    .btn-main {
+      background-color: #e0f0ff;
+      border-color: #4a90e2;
+    }
+    .score {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="exercise-widget">
+    <h1>Simulazione II</h1>
+    <h2>Test di inglese – 20 domande a scelta multipla</h2>
+
+    <button type="button" class="btn btn-main" onclick="verifyAll()">Verifica tutto</button>
+    <div id="score" class="score">Punteggio: 0 / 20</div>
+    <button type="button" class="btn" onclick="downloadHTML()">Scarica questo test in HTML</button>
+
+    <!-- Domande 1–20 -->
+    <div class="question-block" id="q1-block">
+      <div class="question-text">
+        1. Last week I ______ a new car.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> a) have bought</label>
+        <label><input type="radio" name="q1" value="b"> b) bought</label>
+        <label><input type="radio" name="q1" value="c"> c) buyed</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q1')">Verifica</button>
+      <span id="status-q1" class="status-label"></span>
+      <div id="explanation-q1" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q2-block">
+      <div class="question-text">
+        2. There are two ______ in the classroom.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> a) childs</label>
+        <label><input type="radio" name="q2" value="b"> b) childrens</label>
+        <label><input type="radio" name="q2" value="c"> c) children</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q2')">Verifica</button>
+      <span id="status-q2" class="status-label"></span>
+      <div id="explanation-q2" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q3-block">
+      <div class="question-text">
+        3. Mr and Ms Selby are on holiday. Is this cat ______?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> a) them</label>
+        <label><input type="radio" name="q3" value="b"> b) their</label>
+        <label><input type="radio" name="q3" value="c"> c) theirs</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q3')">Verifica</button>
+      <span id="status-q3" class="status-label"></span>
+      <div id="explanation-q3" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q4-block">
+      <div class="question-text">
+        4. Only for this week he ______ to the gym on Monday evening.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> a) goes</label>
+        <label><input type="radio" name="q4" value="b"> b) going</label>
+        <label><input type="radio" name="q4" value="c"> c) is going</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q4')">Verifica</button>
+      <span id="status-q4" class="status-label"></span>
+      <div id="explanation-q4" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q5-block">
+      <div class="question-text">
+        5. I always go to work in ______.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> a) James's car</label>
+        <label><input type="radio" name="q5" value="b"> b) James' car</label>
+        <label><input type="radio" name="q5" value="c"> c) James car's</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q5')">Verifica</button>
+      <span id="status-q5" class="status-label"></span>
+      <div id="explanation-q5" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q6-block">
+      <div class="question-text">
+        6. ______ animal is that? A crocodile or an alligator?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q6" value="a"> a) What</label>
+        <label><input type="radio" name="q6" value="b"> b) Whose</label>
+        <label><input type="radio" name="q6" value="c"> c) Which</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q6')">Verifica</button>
+      <span id="status-q6" class="status-label"></span>
+      <div id="explanation-q6" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q7-block">
+      <div class="question-text">
+        7. ______ to the theatre lately? Yes, I ______ to Othello last week.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q7" value="a"> a) Did you go / go</label>
+        <label><input type="radio" name="q7" value="b"> b) Have you been / went</label>
+        <label><input type="radio" name="q7" value="c"> c) Did you be / went</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q7')">Verifica</button>
+      <span id="status-q7" class="status-label"></span>
+      <div id="explanation-q7" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q8-block">
+      <div class="question-text">
+        8. There's a nice smell in the dining room. What ______?
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q8" value="a"> a) does Mrs Kendall cook</label>
+        <label><input type="radio" name="q8" value="b"> b) is Mrs Kendall cooking</label>
+        <label><input type="radio" name="q8" value="c"> c) Mrs Kendall cooks</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q8')">Verifica</button>
+      <span id="status-q8" class="status-label"></span>
+      <div id="explanation-q8" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q9-block">
+      <div class="question-text">
+        9. There are elegant ______ and ______ at the party.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q9" value="a"> a) ladys/ gentlemen</label>
+        <label><input type="radio" name="q9" value="b"> b) ladies/ gentlemen</label>
+        <label><input type="radio" name="q9" value="c"> c) ladies/ gentleman</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q9')">Verifica</button>
+      <span id="status-q9" class="status-label"></span>
+      <div id="explanation-q9" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q10-block">
+      <div class="question-text">
+        10. After ______ he ate a big lunch.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q10" value="a"> a) swim</label>
+        <label><input type="radio" name="q10" value="b"> b) swimming</label>
+        <label><input type="radio" name="q10" value="c"> c) to swim</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q10')">Verifica</button>
+      <span id="status-q10" class="status-label"></span>
+      <div id="explanation-q10" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q11-block">
+      <div class="question-text">
+        11. My brother is ______ swimmer that I know.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q11" value="a"> a) the best</label>
+        <label><input type="radio" name="q11" value="b"> b) better</label>
+        <label><input type="radio" name="q11" value="c"> c) good</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q11')">Verifica</button>
+      <span id="status-q11" class="status-label"></span>
+      <div id="explanation-q11" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q12-block">
+      <div class="question-text">
+        12. He looks much ______ than he really is.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q12" value="a"> a) old</label>
+        <label><input type="radio" name="q12" value="b"> b) oldest</label>
+        <label><input type="radio" name="q12" value="c"> c) older</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q12')">Verifica</button>
+      <span id="status-q12" class="status-label"></span>
+      <div id="explanation-q12" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q13-block">
+      <div class="question-text">
+        13. Everyone of ______ did ______ best.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q13" value="a"> a) us / our</label>
+        <label><input type="radio" name="q13" value="b"> b) we / us</label>
+        <label><input type="radio" name="q13" value="c"> c) we / our</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q13')">Verifica</button>
+      <span id="status-q13" class="status-label"></span>
+      <div id="explanation-q13" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q14-block">
+      <div class="question-text">
+        14. She ______ for dinner this evening.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q14" value="a"> a) is coming</label>
+        <label><input type="radio" name="q14" value="b"> b) comes</label>
+        <label><input type="radio" name="q14" value="c"> c) came</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q14')">Verifica</button>
+      <span id="status-q14" class="status-label"></span>
+      <div id="explanation-q14" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q15-block">
+      <div class="question-text">
+        15. I ______ in London for eight years, and I don't want to move.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q15" value="a"> a) had lived</label>
+        <label><input type="radio" name="q15" value="b"> b) lived</label>
+        <label><input type="radio" name="q15" value="c"> c) have lived</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q15')">Verifica</button>
+      <span id="status-q15" class="status-label"></span>
+      <div id="explanation-q15" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q16-block">
+      <div class="question-text">
+        16. When ______ they ______ married? "Five years ago."
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q16" value="a"> a) was / got</label>
+        <label><input type="radio" name="q16" value="b"> b) did / get</label>
+        <label><input type="radio" name="q16" value="c"> c) have / got</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q16')">Verifica</button>
+      <span id="status-q16" class="status-label"></span>
+      <div id="explanation-q16" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q17-block">
+      <div class="question-text">
+        17. Kevin ______ his leg while he was playing football.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q17" value="a"> a) break</label>
+        <label><input type="radio" name="q17" value="b"> b) breaked</label>
+        <label><input type="radio" name="q17" value="c"> c) broke</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q17')">Verifica</button>
+      <span id="status-q17" class="status-label"></span>
+      <div id="explanation-q17" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q18-block">
+      <div class="question-text">
+        18. The child ______ some milk last night.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q18" value="a"> a) drank</label>
+        <label><input type="radio" name="q18" value="b"> b) drunk</label>
+        <label><input type="radio" name="q18" value="c"> c) drinked</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q18')">Verifica</button>
+      <span id="status-q18" class="status-label"></span>
+      <div id="explanation-q18" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q19-block">
+      <div class="question-text">
+        19. It's becoming ______ and ______ to find a job.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q19" value="a"> a) more hard / more hard</label>
+        <label><input type="radio" name="q19" value="b"> b) harder / harder</label>
+        <label><input type="radio" name="q19" value="c"> c) hard / harder</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q19')">Verifica</button>
+      <span id="status-q19" class="status-label"></span>
+      <div id="explanation-q19" class="explanation"></div>
+    </div>
+
+    <div class="question-block" id="q20-block">
+      <div class="question-text">
+        20. ______ is getting married.
+      </div>
+      <div class="options">
+        <label><input type="radio" name="q20" value="a"> a) A friend of me</label>
+        <label><input type="radio" name="q20" value="b"> b) A friend of mine</label>
+        <label><input type="radio" name="q20" value="c"> c) One my friends</label>
+      </div>
+      <button type="button" class="btn" onclick="verifyQuestion('q20')">Verifica</button>
+      <span id="status-q20" class="status-label"></span>
+      <div id="explanation-q20" class="explanation"></div>
+    </div>
+  </div>
+
+  <script>
+    // Risposte corrette secondo Simulazione-II-RISPOSTE.docx
+    const correctAnswers = {
+      q1: 'b',
+      q2: 'c',
+      q3: 'c',
+      q4: 'c',
+      q5: 'a',
+      q6: 'c',
+      q7: 'b',
+      q8: 'b',
+      q9: 'b',
+      q10: 'b',
+      q11: 'a',
+      q12: 'c',
+      q13: 'a',
+      q14: 'a',
+      q15: 'c',
+      q16: 'b',
+      q17: 'c',
+      q18: 'a',
+      q19: 'b',
+      q20: 'b'
+    };
+
+    const explanations = {
+      q1: "Risposta: b) bought. Passato semplice irregolare del verbo \"buy\" → \"bought\" (non \"buyed\", che non esiste).",
+      q2: "Risposta: c) children. Plurale irregolare di \"child\" → \"children\" (non \"childs\" né \"childrens\").",
+      q3: "Risposta: c) theirs. Pronome possessivo assoluto (their + s): sostituisce \"their cat\" e non è seguito da alcun sostantivo.",
+      q4: "Risposta: c) is going. \"Only for this week\" indica un'eccezione temporanea alla solita routine: si usa il present continuous invece del solito present simple.",
+      q5: "Risposta: a) James's car. Genitivo sassone: nome proprio singolare + 's per indicare possesso (la macchina di James).",
+      q6: "Risposta: c) Which. \"Which\" si usa quando si sceglie tra un numero limitato e definito di opzioni (qui: coccodrillo o alligatore).",
+      q7: "Risposta: b) Have you been / went. \"Lately\" richiede il present perfect nella domanda (esperienza recente non collocata in un momento preciso); nella risposta si specifica un momento preciso (\"last week\"), quindi si usa il past simple (\"went\").",
+      q8: "Risposta: b) is Mrs Kendall cooking. La situazione descritta (\"c'è un buon profumo ora\") indica un'azione in corso in questo momento: present continuous.",
+      q9: "Risposta: b) ladies/ gentlemen. Plurale di \"lady\" (consonante + y → ies) = \"ladies\"; plurale irregolare di \"gentleman\" = \"gentlemen\".",
+      q10: "Risposta: b) swimming. Dopo la preposizione \"after\" il verbo si mette in forma -ing (gerundio), non all'infinito.",
+      q11: "Risposta: a) the best. Superlativo relativo (irregolare di \"good\") usato con \"that I know\": tra tutti i nuotatori che conosco, il migliore.",
+      q12: "Risposta: c) older. Comparativo di maggioranza con \"than\" (older ... than), non il superlativo.",
+      q13: "Risposta: a) us / our. Dopo la preposizione \"of\" si usa il pronome oggetto \"us\" (Everyone of us); \"our\" è l'aggettivo possessivo che precede il sostantivo sottinteso (\"our best [effort]\").",
+      q14: "Risposta: a) is coming. \"This evening\" indica un programma/appuntamento già stabilito nel futuro vicino: present continuous con valore di futuro.",
+      q15: "Risposta: c) have lived. \"For eight years\" + un'azione che continua nel presente (non vuole trasferirsi) richiede il present perfect.",
+      q16: "Risposta: b) did / get. Domanda al passato semplice (la risposta è \"Five years ago\"): ausiliare \"did\" + verbo alla forma base \"get\".",
+      q17: "Risposta: c) broke. Passato semplice irregolare del verbo \"break\" → \"broke\" (non \"breaked\", che non esiste).",
+      q18: "Risposta: a) drank. Passato semplice irregolare di \"drink\" → \"drank\" (non \"drunk\", che è il participio passato, né \"drinked\").",
+      q19: "Risposta: b) harder / harder. Comparativo doppio (\"harder and harder\") per esprimere un cambiamento progressivo; \"hard\" è un aggettivo breve, quindi il comparativo si forma con -er.",
+      q20: "Risposta: b) A friend of mine. \"A friend of mine\" (doppio genitivo) è la forma corretta per \"un mio amico\"; \"a friend of me\" è scorretto."
+    };
+
+    const attempts = {};
+
+    function showResult(id, radios, status, selected, correct) {
+      const explanationDiv = document.getElementById('explanation-' + id);
+
+      if (selected === correct) {
+        status.textContent = 'Corretto';
+        status.className = 'status-label status-correct';
+        if (explanationDiv) {
+          explanationDiv.className = 'explanation';
+          explanationDiv.textContent = '';
+        }
+      } else {
+        status.textContent = 'Soluzione';
+        status.className = 'status-label status-solution';
+        for (let r of radios) {
+          const label = r.closest('label');
+          if (r.value === correct) {
+            r.checked = true;
+            if (label) label.classList.add('correct-answer-label');
+          } else {
+            r.disabled = true;
+          }
+        }
+        if (explanationDiv) {
+          explanationDiv.textContent = explanations[id] || '';
+          explanationDiv.className = 'explanation show';
+        }
+      }
+
+      for (let r of radios) {
+        r.disabled = true;
+      }
+    }
+
+    function verifyQuestion(id) {
+      const radios = document.getElementsByName(id);
+      const status = document.getElementById('status-' + id);
+
+      if (!attempts[id]) {
+        attempts[id] = 0;
+      }
+
+      let selected = null;
+      for (let r of radios) {
+        if (r.checked) {
+          selected = r.value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        status.textContent = 'Vuoto / Scegli';
+        status.className = 'status-label status-empty';
+        return;
+      }
+
+      if (attempts[id] >= 1) return;
+
+      attempts[id] += 1;
+      const correct = correctAnswers[id];
+
+      showResult(id, radios, status, selected, correct);
+
+      updateScore();
+    }
+
+    function verifyAll() {
+      for (const id of Object.keys(correctAnswers)) {
+        const radios = document.getElementsByName(id);
+        const status = document.getElementById('status-' + id);
+
+        if (!attempts[id]) {
+          attempts[id] = 0;
+        }
+
+        let selected = null;
+        for (let r of radios) {
+          if (r.checked) {
+            selected = r.value;
+            break;
+          }
+        }
+
+        if (!selected) {
+          status.textContent = 'Vuoto / Scegli';
+          status.className = 'status-label status-empty';
+          continue;
+        }
+
+        if (attempts[id] >= 1) continue;
+
+        attempts[id] += 1;
+        const correct = correctAnswers[id];
+
+        showResult(id, radios, status, selected, correct);
+      }
+
+      updateScore();
+    }
+    function updateScore() {
+      let correctCount = 0;
+      let total = 0;
+
+      for (const id in correctAnswers) {
+        if (!correctAnswers.hasOwnProperty(id)) continue;
+        total++;
+        const status = document.getElementById('status-' + id);
+        if (!status) continue;
+        if (status.textContent === 'Corretto') {
+          correctCount++;
+        }
+      }
+
+      const scoreEl = document.getElementById('score');
+      scoreEl.textContent = 'Punteggio: ' + correctCount + ' / ' + total;
+    }
+
+    function downloadHTML() {
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'simulazione-II.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
